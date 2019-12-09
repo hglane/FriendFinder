@@ -1,4 +1,4 @@
-var friends = require("../data/friends.js");
+var friends = require("../data/friends");
 
 module.exports = function(app) {
     app.get("/api/friends", function(req,res) {
@@ -28,7 +28,7 @@ module.exports = function(app) {
         };
 
         console.log("Name: " + userName);
-        console.log("User Score " + userScores);
+        console.log("User Score: " + userScores);
 
         var sum = b.reduce((a, b) => a + b, 0);
 
