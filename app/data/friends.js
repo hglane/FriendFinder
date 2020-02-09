@@ -25,7 +25,7 @@ var friends = [
         scores: [4, 4, 4, 4, 1, 4, 5, 3, 4, 1]
     },
     {
-        name: "Robert Davdison Jr",
+        name: "Robert Davidson Jr",
         photo: "https://ca.slack-edge.com/TMB40JTPG-ULYMQ0RDZ-deb494e65b57-512",
         scores: [2, 3, 3, 3, 5, 1, 2, 4, 5, 2]
     },
