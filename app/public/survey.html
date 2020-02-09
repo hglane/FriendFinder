@@ -161,8 +161,8 @@
                 </div>
 
                 <div class="modal-body">
-                    <h2 id="matchName"></h2>
-                    <img id="matchImg" src="https://via.placeholder.com/400x400"
+                    <h2 id="match-name"></h2>
+                    <img id="match-img" src="https://via.placeholder.com/400x400"
                         alt="Placeholder image in case user pic doesn't show">
                 </div>
 
@@ -176,18 +176,46 @@
     </div>
 
     <script type="text/javascript">
-        $("#submit").on("click", function () {
+        var config = {
+            ".chosen-select": {},
+            ".chosen-select-deselect": {
+                allow_single_deselect: true
+            },
+            ".chosen-select-no-single": {
+                disable_search_threshold: 10
+            },
+            ".chosen-select-no-results": {
+                no_results_text: "Oops, nothing found!"
+            },
+            ".chosen-select-width": {
+                width: "95%"
+            }
+        };
+
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+
+        $("submit").on("click", function (event) {
+            event.preventDefault();
+
             function validateForm() {
                 var isValid = true;
                 $(".form-control").each(function () {
-                    if ($(this).val() === "") isValid = false;
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
                 });
+
                 $(".chosen-select").each(function () {
-                    if ($(this).val() === "") isvalid = false;
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
                 });
                 return isValid;
             }
-            if (validateForm() == true) {
+
+            if (validateForm()) {
                 var userData = {
                     name: $("#name").val(),
                     photo: $("#photo").val(),
@@ -204,18 +232,18 @@
                         $("#q10").val(),
                     ]
                 };
-                var currentURL = window.location.origin;
-                $.post(currentURL + "/api/friends", userData, function (data) {
-                    $("#matchName").text(data.name);
-                    $("#matchImg").attr("src", data.photo);
+
+                $.post("/api/friends", userData, function(data) {
+                    $("#match-name").text(data.name);
+                    $("#match-img").attr("src", data.photo);
 
                     $("#resultsModal").modal("toggle");
                 });
             } else {
                 alert("Please fill out all fields before submitting!");
             }
-            return false;
         });
+
     </script>
 
 
